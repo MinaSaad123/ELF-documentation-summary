@@ -172,11 +172,47 @@ As mentioned above, ELF provides an object file framework to support **multiple 
 |**EI_PAD** |7| Start of padding bytes|
 |**EI_NIDENT** |16| Size of e_ident[ ]|
 
+**`EI_MAG0`** to **`EI_MAG3`** A file's first 4 bytes hold a **"magic number,"** identifying the file as an ELF object file.
+
+|Name |Value |Meaning|
+|---|--|--|
+|**ELFMAG0**| 0x7f| e_ident[EI_MAG0]|
+|**ELFMAG1**| 'E' |e_ident[EI_MAG1]|
+|**ELFMAG2** |'L'|e_ident[EI_MAG2]|
+|**ELFMAG3** |'F' |e_ident[EI_MAG3]|
+
+**`EI_CLASS`** The next byte, e_ident[EI_CLASS], **identifies the file's class, or capacity.**
+
+|Name |Value |Meaning|
+|---|--|--|
+|**ELFCLASSNONE**| 0 |Invalid class|
+|**ELFCLASS32** |1 |32-bit objects|
+|**ELFCLASS64** |2 |64-bit objects|
+
+The file format is designed to be portable among machines of various sizes, **without imposing the sizes of the largest machine on the smallest**. 
+
+Class **`ELFCLASS32`** supports machines with files and virtual address spaces **up to 4 gigabytes**; it uses the basic types defined above.
+
+Class **`ELFCLASS64`** is incomplete and refers to the 64-bit architectures. Its appearance here shows how the object file may change.
+
+**`EI_DATA`**  Byte `e_ident[EI_DATA]` **specifies the data encoding of the processor-specific data in the object file**. The following encodings are currently defined.
+
+|Name |Value |Meaning|
+|---|--|--|
+|**ELFDATANONE**| 0| Invalid data encoding|
+|**ELFDATA2LSB** |1| See below|
+|**ELFDATA2MSB** |2| See below|
+
+### **Data Encoding**
 
 
+|ELFDATA2LSB |ELFDATA2MSB |
+|---|--|
+|<img align="right" src="https://i.imgur.com/OXB8JaW.png" width="500"> | <img align="right" src="https://i.imgur.com/xh1c3bk.png" width="500"> |
 
+**`EI_VERSION`** Byte e_ident[EI_VERSION] **specifies the ELF header version number**. Currently, this value must be `EV_CURRENT`, as explained above for `e_version`.
 
-
+**`EI_PAD`** This value marks the beginning of the unused bytes in `e_ident`. These bytes are reserved and **set to zero**; programs that read object files should ignore them. The value of `EI_PAD` **will change in the future if currently unused bytes are given meanings.**
 
 
 

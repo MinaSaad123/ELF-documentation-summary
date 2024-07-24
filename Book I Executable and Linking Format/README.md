@@ -75,9 +75,7 @@ Elf32_Half e_shnum;
 Elf32_Half e_shstrndx;
 } Elf32_Ehdr; 
 ```
-**`e_ident`** The initial bytes mark the file as an object file and provide machine-independentdata with which to decode and interpret the file's contents.
-
-[**More information on it**](#Identification-Indexes)
+**`e_ident`** The initial bytes mark the file as an object file and provide machine-independentdata with which to decode and interpret the file's contents. [**'More information on it'**](#e_ident[ ]-Identification-Indexes)
 
 **`e_type`** This member identifies the object file type.
 

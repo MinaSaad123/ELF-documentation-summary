@@ -7,10 +7,11 @@ This book mainly diverse into three parts:
 2. **Book II:** Processor Specific (Intel Architecture).
 3. **Book III:** Operating System Specific (UNIX System V Release 4)
 
-| State |  Task  |
-|-------|--------|
-| - [x]  |  **Book I: Executable and Linking Format (ELF)**   |
-| - [ ]  |  **Book II: Processor Specific (Intel Architecture)**   |
-| - [ ]  |  **Book III: Operating System Specific (UNIX System V Release 4)**  |
-
 ![ELF picture](https://qph.cf2.quoracdn.net/main-qimg-cfec39576fc319f3238c14705ac95755)
+
+- [x]  **Book I: Executable and Linking Format (ELF)** 
+- [ ]  **Book II: Processor Specific (Intel Architecture)** 
+- [ ]  **Book III: Operating System Specific (UNIX System V Release 4)** 
+
+
+

@@ -1,16 +1,13 @@
 
 ## Table of Contents
 
-- [**Introduction**](#Introduction)
-- [**File Format**](#File-Format)
-- [**ELF Header**](#ELF-Header)
-- [**ELF Identification**](#ELF-Identification)
-- [**Sections**](#Sections)
-- [**Special Sections**](#Special-Sections)
-- [**String Table**](#String-Table)
-- [**Symbol Table**](#Symbol-Table)
-- [**Symbol Values**](#Symbol-Values)
-- [**Relocation**](#Relocation)
+- [Table of Contents](#table-of-contents)
+- [Introduction](#introduction)
+- [**File Format**](#file-format)
+  - [**Data Representation**](#data-representation)
+- [**ELF Header**](#elf-header)
+- [**ELF Identification**](#elf-identification)
+  - [**e\_ident Identification Indexes**](#e_ident-identification-indexes)
 
 ## Introduction
 **There are three main types of object files**
@@ -75,7 +72,7 @@ Elf32_Half e_shnum;
 Elf32_Half e_shstrndx;
 } Elf32_Ehdr; 
 ```
-**`e_ident`** The initial bytes mark the file as an object file and provide machine-independentdata with which to decode and interpret the file's contents. [**'More information on it'**](#e_ident[-]-Identification-Indexes)
+**`e_ident`** The initial bytes mark the file as an object file and provide machine-independentdata with which to decode and interpret the file's contents. [**'More information on it'**](#e_ident Identification Indexes)
 
 **`e_type`** This member identifies the object file type.
 
@@ -158,7 +155,7 @@ As mentioned above, ELF provides an object file framework to support **multiple 
 
 **The initial bytes of an ELF header (and an object file) correspond to the `e_ident` member**
 
-### **e_ident[ ] Identification Indexes**
+### **e_ident Identification Indexes**
 
 |Name| Value| Purpose|
 |--|--|--|

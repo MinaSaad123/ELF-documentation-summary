@@ -9,7 +9,7 @@ This book mainly diverse into three parts:
 
 | State |  Task  |
 |-------|--------|
-| - [ ]  |  **Book I: Executable and Linking Format (ELF)**   |
+| - [x]  |  **Book I: Executable and Linking Format (ELF)**   |
 | - [ ]  |  **Book II: Processor Specific (Intel Architecture)**   |
 | - [ ]  |  **Book III: Operating System Specific (UNIX System V Release 4)**  |
 

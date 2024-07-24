@@ -1,13 +1,16 @@
 
 ## Table of Contents
 
-- [Table of Contents](#table-of-contents)
-- [Introduction](#introduction)
-- [**File Format**](#file-format)
-  - [**Data Representation**](#data-representation)
-- [**ELF Header**](#elf-header)
-- [**ELF Identification**](#elf-identification)
-  - [**e\_ident Identification Indexes**](#e_ident-identification-indexes)
+- [**Introduction**](#Introduction)
+- [**File Format**](#File-Format)
+- [**ELF Header**](#ELF-Header)
+- [**ELF Identification**](#ELF-Identification)
+- [**Sections**](#Sections)
+- [**Special Sections**](#Special-Sections)
+- [**String Table**](#String-Table)
+- [**Symbol Table**](#Symbol-Table)
+- [**Symbol Values**](#Symbol-Values)
+- [**Relocation**](#Relocation)
 
 ## Introduction
 **There are three main types of object files**

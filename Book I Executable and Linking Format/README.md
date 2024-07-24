@@ -158,7 +158,7 @@ As mentioned above, ELF provides an object file framework to support **multiple 
 
 **The initial bytes of an ELF header (and an object file) correspond to the `e_ident` member**
 
-**`e_ident[ ]` Identification Indexes**
+**e_ident[ ] Identification Indexes**
 
 |Name| Value| Purpose|
 |--|--|--|

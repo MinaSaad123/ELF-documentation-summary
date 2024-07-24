@@ -77,7 +77,10 @@ Elf32_Half e_shstrndx;
 ```
 **`e_ident`** The initial bytes mark the file as an object file and provide machine-independentdata with which to decode and interpret the file's contents.
 
+[**More information on it**](#Identification-Indexes)
+
 **`e_type`** This member identifies the object file type.
+
 
 |Name|Value|Meaning|
 |--|--|--|
@@ -112,6 +115,69 @@ reserved for processor-specific semantics.
 > **Processor-specific ELF names use the machine name to distinguish them**. For
 example, the flags mentioned below use the prefix **`EF_`**; a flag named **`WIDGET`** for
 the **`EM_XYZ`** machine would be called **`EF_XYZ_WIDGET`**.
+
+**`e_version`** This member identifies **the object file version**.
+
+|Name|Value|Meaning|
+|--|--|--|
+|**EV_NONE**| 0 |Invalid version|
+|**EV_CURRENT** |1 |Current version|
+
+The value 1 signifies the original file format; extensions will create new versions with higher numbers. The value of EV_CURRENT, **though given as 1 above, will change as necessary to reflect the current version number.**
+
+**`e_entry`** This member gives **the virtual address** to which the system first transfers control, control, thus starting the process. If the file has no associated entry point, this member **holds zero**.
+
+**`e_phoff`** This member holds **the program header table's file offset in bytes**. If the file has no program header table, this member **holds zero**.
+
+**`e_shoff`** This member holds **the section header table's file offset in bytes**. If the file has no section header table, this member **holds zero**.
+
+**`e_flags`** This member holds **processor-specific flags associated with the file**. Flag names take the form EF_machine_flag.
+
+**`e_ehsize`** This member holds **the ELF header's size in bytes**.
+
+**`e_phentsize`** This member holds **the size in bytes of one entry in the file's program header table**;
+
+> [!NOTE]
+> All entries are the same size.
+
+**`e_phnum`** This member holds **the number of entries in the program header table**. Thus the product of `e_phentsize` and `e_phnum` gives the table's size in bytes. If a file has no program header table, e_phnum holds the **value zero**.
+
+**`e_shentsize`** This member holds **a section header's size in bytes**. A section header is one entry
+in the section header table; all entries are the same size.
+
+
+> [!NOTE]
+> All entries are the same size.
+
+**`e_shnum`** This member holds t**he number of entries in the section header table**. Thus the
+product of `e_shentsize` and `e_shnum` gives the section header table's size in
+bytes. If a file has no section header table, `e_shnum` holds the value zero.
+
+**`e_shstrndx`** This member holds **the section header table index of the entry associated with the section name string table**. If the file has no section name string table, this member holds the value `SHN_UNDEF`. See "Sections" and "String Table" below for more information.
+
+## **ELF Identification**
+As mentioned above, ELF provides an object file framework to support **multiple processors, multiple data encodings, and multiple classes of machines.** To support this object file family, the initial bytes of the file specify how to interpret the file, independent of the processor on which the inquiry is made and independent of the file's remaining contents.
+
+**The initial bytes of an ELF header (and an object file) correspond to the `e_ident` member**
+
+**`e_ident[ ]` Identification Indexes**
+
+|Name| Value| Purpose|
+|--|--|--|
+|**EI_MAG0**| 0| File identification|
+|**EI_MAG1** |1| File identification|
+|**EI_MAG2** |2| File identification|
+|**EI_MAG3**| 3| File identification|
+|**EI_CLASS** |4| File class|
+|**EI_DATA** |5| Data encoding|
+|**EI_VERSION** |6| File version|
+|**EI_PAD** |7| Start of padding bytes|
+|**EI_NIDENT** |16| Size of e_ident[ ]|
+
+
+
+
+
 
 
 

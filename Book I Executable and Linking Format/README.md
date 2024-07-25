@@ -216,6 +216,131 @@ Class **`ELFCLASS64`** is incomplete and refers to the 64-bit architectures. Its
 
 ## Sections
 
+An object file's section header table lets one locate all the file's sections. The section header table **is an array** of `Elf32_Shdr` structures as described below. **A section header table index is a subscript into this array.** The ELF header's `e_shoff` member gives the byte offset from the beginning of the file to the section header table; `e_shnum` tells how many entries the section header table contains; `e_shentsize` gives the size in bytes of each entry. Some section header table indexes are reserved; an object file will not have sections for these special indexes.
+
+
+### Special Section Indexes
+As we said `A section header table index` **is a subscript into this array.**
+
+|Name | Value|
+|--|-------|
+|**SHN_UNDEF**| 0|
+|**SHN_LORESERVE**| 0xff00|
+|**SHN_LOPROC**|0xff00|
+|**SHN_HIPROC** |0xff1f|
+|**SHN_ABS**| 0xfff1|
+|**SHN_COMMON**| 0xfff2|
+|**SHN_HIRESERVE**| 0xffff|
+
+**`SHN_UNDEF`** **This value marks an undefined, missing, irrelevant, or otherwise meaningless section reference.** For example, a symbol "defined'' relative to section number SHN_UNDEF is an undefined symbol.
+
+> [!NOTE]
+> Although index 0 is reserved as the undefined value, the section header table contains an entry for index 0. That is, if the e_shnum member of the ELF header says a file has 6 entries in the section header table, **they have the indexes 0 through 5**. 
+
+**`SHN_LORESERVE`** This value specifies **the lower bound of the range of reserved indexes.**
+
+**`SHN_LOPROC`** through **`SHN_HIPROC`** Values in this **inclusive range are reserved for processor-specific semantics**.
+
+**`SHN_ABS`** This value **specifies absolute values for the corresponding reference.** For example, symbols defined relative to section number `SHN_ABS` have absolute values and are not affected by relocation.
+
+**`SHN_COMMON`** Symbols defined relative to this section **are common symbols**, such as
+`FORTRAN COMMON` or **unallocated C external variables.**
+
+**`SHN_HIRESERVE`** This value specifies **the upper bound of the range of reserved indexes. The system reserves indexes between `SHN_LORESERVE` and `SHN_HIRESERVE`**, inclusive; the values do not reference the section header table.That is, the section header table does not contain entries for the reserved indexes.
+
+Sections contain all information in an object file, except the ELF header, the program header
+table, and the section header table. Moreover, object files' sections satisfy several conditions.
+1. Every section in an object file has exactly one section header describing it. **Section headers may exist that do not have a section.**
+2. Each section **occupies one contiguous (possibly empty) sequence of bytes within a file.**
+3. **Sections in a file may not overlap**. No byte in a file resides in more than one section.
+4.  An object file may have **inactive space**. The various headers and the sections might not "cover" every byte in an object file. The contents of the inactive data are unspecified.
+  
+  **A section header has the following structure.**
+
+```C
+typedef struct {
+Elf32_Word sh_name;
+Elf32_Word sh_type;
+Elf32_Word sh_flags;
+Elf32_Addr sh_addr;
+Elf32_Off sh_offset;
+Elf32_Word sh_size;
+Elf32_Word sh_link;
+Elf32_Word sh_info;
+Elf32_Word sh_addralign;
+Elf32_Word sh_entsize;
+} Elf32_Shdr;
+
+```
+**`sh_name`** This member specifies **the name of the section**. Its value is an index into the section header string table section, giving the location of **a null-terminated string**.
+
+**`sh_type`** This member **categorizes the section's contents and semantics**. Section types and their descriptions appear below.
+
+**`sh_flags`** Sections support 1-bit flags that **describe miscellaneous attributes.** Flag definitions appear below.
+
+**`sh_addr`** If the section will appear in the memory image of a process, **this member gives the address at which he section's first byte should reside**. Otherwise, the member contains 0.
+
+
+**`sh_offset`** This member's value **gives the byte offset from the beginning of the file to the first byte in the section**. One section type, `SHT_NOBITS` occupies no space in the file, and its sh_offset member locates the conceptual placement in the file.
+
+**`sh_size`** This member **gives the section's size in bytes**. Unless the section type is `SHT_NOBITS`, the section occupies sh_size bytes in the file. A section of type `SHT_NOBITS` may have a non-zero size, but it occupies no space in the file.
+
+**`sh_link`** This member **holds a section header table index link**, whose interpretation depends on the section type. 
+
+**`sh_info`** This member **holds extra information**, whose interpretation depends on the section type.
+
+**`sh_addralign`** Some sections **have address alignment constraints**. For example, if a section holds a doubleword, the system must ensure doubleword alignment for the entire section. That is, the value of `sh_addr` must be congruent to 0, modulo the value of `sh_addralign`. Currently, only 0 and positive integral powers of two are allowed. Values 0 and 1 mean the section has no alignment constraints.
+
+**`sh_entsize`** Some sections **hold a table of fixed-size entries**, such as a symbol table. For such a section, this member gives the size in bytes of each entry. The member contains 0 if the section does not hold a table of fixed-size entries.
+
+### Section Types 
+
+ sh_type This member **categorizes the section's contents and semantics**
+
+ |Name|Value|
+ |--|--|
+ |**SHT_NULL** |0|
+ |**SHT_PROGBITS**| 1|
+ |**SHT_SYMTAB** |2|
+ |**SHT_STRTAB** |3|
+ |**SHT_RELA** |4|
+ |**SHT_HASH** |5|
+ |**SHT_DYNAMIC** |6|
+ |**SHT_NOTE** |7|
+ |**SHT_NOBITS** |8|
+ |**SHT_REL** |9|
+ |**SHT_SHLIB** |10|
+ |**SHT_DYNSYM** |11|
+ |**SHT_LOPROC** |0x70000000|
+ |**SHT_HIPROC** |0x7fffffff|
+ |**SHT_LOUSER** |0x80000000|
+ |**SHT_HIUSER** |0xffffffff|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
